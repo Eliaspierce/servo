@@ -5491,7 +5491,7 @@ class CGDOMJSProxyHandler_getOwnPropertyDescriptor(CGAbstractExternMethod):
                         return false;
                     }
                     if *is_none {
-                        return proxyhandler::cross_origin_property_fallback(cx, proxy, id, desc);
+                        return proxyhandler::cross_origin_property_fallback(cx, proxy, id, desc, is_none);
                     }
                     return true;
                 }
@@ -5508,6 +5508,7 @@ class CGDOMJSProxyHandler_getOwnPropertyDescriptor(CGAbstractExternMethod):
                 attrs += " | JSPROP_READONLY"
             fillDescriptor = (#"desc.value_ = result_root.get();\n"
                               "SetDataPropertyDescriptor(MutableHandle::from_raw(desc), result_root.handle(), (%s) as u32);\n"
+                              "*is_none = false;\n"
                               #"fill_property_descriptor(MutableHandle::from_raw(desc), proxy.get(), (%s) as u32);\n"
                               "return true;" % attrs)
             templateValues = {
@@ -5534,6 +5535,7 @@ class CGDOMJSProxyHandler_getOwnPropertyDescriptor(CGAbstractExternMethod):
                 attrs = "0"
             fillDescriptor = (#"desc.value_ = result_root.get();\n"
                               "SetDataPropertyDescriptor(MutableHandle::from_raw(desc), result_root.handle(), (%s) as u32);\n"
+                              "*is_none = false;\n"
                               #"fill_property_descriptor(MutableHandle::from_raw(desc), proxy.get(), (%s) as u32);\n"
                               "return true;" % attrs)
             templateValues = {

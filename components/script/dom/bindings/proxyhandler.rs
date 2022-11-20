@@ -670,6 +670,7 @@ pub unsafe fn cross_origin_property_fallback(
     _proxy: RawHandleObject,
     id: RawHandleId,
     desc: RawMutableHandle<PropertyDescriptor>,
+    is_none: *mut bool,
 ) -> bool {
     //assert!(desc.obj.is_null(), "why are we being called?");
 
@@ -686,6 +687,7 @@ pub unsafe fn cross_origin_property_fallback(
             obj: proxy.get(),
     };*/
         SetDataPropertyDescriptor(MutableHandle::from_raw(desc), HandleValue::undefined(), jsapi::JSPROP_READONLY as u32);
+        *is_none = false;
         return true;
     }
 
