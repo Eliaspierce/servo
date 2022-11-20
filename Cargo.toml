@@ -39,7 +39,7 @@ raqote = { git = "https://github.com/jdm/raqote", branch = "fkup" }
 mozjs_sys = { git = "https://github.com/jdm/mozjs", branch = "new-sm" }
 [patch."https://github.com/servo/rust-mozjs"]
 #mozjs = { path = "../mozjs/rust-mozjs" }
-mozjs_sys = { git = "https://github.com/jdm/mozjs", branch = "new-sm" }
+mozjs = { git = "https://github.com/jdm/mozjs", branch = "new-sm" }
 
 # https://github.com/servo/servo/issues/27515#issuecomment-671474054
 [patch."https://github.com/servo/webrender"]
