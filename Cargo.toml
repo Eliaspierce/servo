@@ -35,11 +35,11 @@ winit = { git = "https://github.com/rust-windowing/winit.git", rev = "4192d04a53
 raqote = { git = "https://github.com/jdm/raqote", branch = "fkup" }
 
 [patch."https://github.com/servo/mozjs"]
-#mozjs_sys = { path = "../mozjs/mozjs" }
-mozjs_sys = { git = "https://github.com/jdm/mozjs", branch = "new-sm" }
+mozjs_sys = { path = "../mozjs/mozjs" }
+#mozjs_sys = { git = "https://github.com/jdm/mozjs", branch = "new-sm" }
 [patch."https://github.com/servo/rust-mozjs"]
-#mozjs = { path = "../mozjs/rust-mozjs" }
-mozjs = { git = "https://github.com/jdm/mozjs", branch = "new-sm" }
+mozjs = { path = "../mozjs/rust-mozjs" }
+#mozjs = { git = "https://github.com/jdm/mozjs", branch = "new-sm" }
 
 # https://github.com/servo/servo/issues/27515#issuecomment-671474054
 [patch."https://github.com/servo/webrender"]
