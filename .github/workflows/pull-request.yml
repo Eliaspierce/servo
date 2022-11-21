@@ -8,23 +8,23 @@ env:
   SHELL: /bin/bash
 
 jobs:
-  build-linux:
-    name: Build (Linux)
-    runs-on: ubuntu-20.04
+  build-uwp-arm64:
+    name: Build (Windows UWP arm64)
+    runs-on: windows-2019
     steps:
+      - name: Branch check
+        if: ${{ !contains('refs/heads/auto refs/heads/try refs/heads/try-windows', github.ref) }}
+        run: exit 0
       - uses: actions/checkout@v2
         with:
           fetch-depth: 2
+      - name: Copy to C drive
+        run: cp D:\a C:\ -Recurse
       - name: Bootstrap
+        working-directory: "C:\\a\\${{ github.event.repository.name }}\\${{ github.event.repository.name }}"
         run: |
-          python3 -m pip install --upgrade pip virtualenv
-          sudo apt update
-          python3 ./mach bootstrap
+          python -m pip install --upgrade pip virtualenv
+          python mach fetch
       - name: Release build
-        run: python3 ./mach build --release
-      - name: Unit tests
-        run: python3 ./mach test-unit --release
-      - name: Tidy
-        run: python3 ./mach test-tidy --no-progress --all
-      - name: Lockfile check
-        run: ./etc/ci/lockfile_changed.sh
+        working-directory: "C:\\a\\${{ github.event.repository.name }}\\${{ github.event.repository.name }}"
+        run: python mach build --release --target=aarch64-uwp-windows-msvc
